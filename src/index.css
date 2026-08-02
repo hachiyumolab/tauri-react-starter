@@ -1,0 +1,208 @@
+/* =========================================================================
+   デザイントークン（実体）
+   仕様は docs/design.md、視覚見本は docs/styleguide.html。
+   色を変えるときは3つとも一緒に更新すること。
+   ========================================================================= */
+
+:root {
+  /* --- 面・文字・枠（ライト既定） --- */
+  --bg: #fdfdff;
+  --surface: #f6f7fb;
+  --surface-raised: #ffffff;
+  --field: #eceef5;
+  --border: #e4e6ee;
+  --hover: rgba(20, 22, 30, 0.04);
+  --text: #1a1b22;
+  --text-muted: #6b6f7e;
+  --text-faint: #9aa0af;
+  --text-on-accent: #ffffff;
+
+  /* --- ブランド（主役＝ブルー） --- */
+  --accent: #2e90e8;
+  --accent-hover: #2379cc;
+  --accent-active: #1c67b4;
+  --accent-soft: rgba(46, 144, 232, 0.1);
+  --focus: rgba(46, 144, 232, 0.5);
+  --link: #2379cc;
+  --link-hover: #1b5fa8;
+  --brand-purple: #9b4fe8;
+  --brand-pink: #e24e97;
+  --brand-gradient: linear-gradient(135deg, #2e90e8, #9b4fe8, #e24e97);
+
+  /* --- お金（純増減のみ） --- */
+  --pos: #07a96e;
+  --neg: #d83a3f;
+  --pos-fill: #05d48c;
+  --neg-fill: #ef454a;
+  --chart-up: #4caf50;
+  --chart-down: #b40000;
+
+  /* --- ステータス --- */
+  --success: #07a96e;
+  --warning: #c77f0e;
+  --warning-soft: #fff3d6;
+  --danger: #d83a3f;
+  --info: #2e90e8;
+
+  /* --- タイポグラフィ --- */
+  --font-sans: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+
+  /* --- 余白（4px基準） --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* --- 角丸 --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-pill: 999px;
+
+  /* --- 影（控えめ） --- */
+  --shadow-sm: 0 1px 2px rgba(20, 22, 30, 0.06), 0 1px 3px rgba(20, 22, 30, 0.04);
+  --shadow-md: 0 6px 20px rgba(20, 22, 30, 0.1);
+}
+
+/* --- ダーク：OS設定 --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131419;
+    --surface: #1b1d24;
+    --surface-raised: #22262f;
+    --field: #262a34;
+    --border: #2e323d;
+    --hover: rgba(255, 255, 255, 0.05);
+    --text: #e8e9ef;
+    --text-muted: #9a9fb0;
+    --text-faint: #656b79;
+
+    --accent-hover: #4ba3f0;
+    --accent-active: #66b4f2;
+    --accent-soft: rgba(46, 144, 232, 0.18);
+    --focus: rgba(46, 144, 232, 0.55);
+    --link: #6fb6f3;
+    --link-hover: #93c8f8;
+
+    --pos: #1fdb97;
+    --neg: #ff6469;
+
+    --success: #1fdb97;
+    --warning: #e7a93c;
+    --warning-soft: rgba(231, 169, 60, 0.16);
+    --danger: #ff6469;
+    --info: #4ba3f0;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* --- 手動切替（OS設定より優先） --- */
+:root[data-theme="light"] {
+  --bg: #fdfdff;
+  --surface: #f6f7fb;
+  --surface-raised: #ffffff;
+  --field: #eceef5;
+  --border: #e4e6ee;
+  --hover: rgba(20, 22, 30, 0.04);
+  --text: #1a1b22;
+  --text-muted: #6b6f7e;
+  --text-faint: #9aa0af;
+  --accent-hover: #2379cc;
+  --accent-active: #1c67b4;
+  --accent-soft: rgba(46, 144, 232, 0.1);
+  --focus: rgba(46, 144, 232, 0.5);
+  --link: #2379cc;
+  --link-hover: #1b5fa8;
+  --pos: #07a96e;
+  --neg: #d83a3f;
+  --success: #07a96e;
+  --warning: #c77f0e;
+  --warning-soft: #fff3d6;
+  --danger: #d83a3f;
+  --info: #2e90e8;
+  --shadow-sm: 0 1px 2px rgba(20, 22, 30, 0.06), 0 1px 3px rgba(20, 22, 30, 0.04);
+  --shadow-md: 0 6px 20px rgba(20, 22, 30, 0.1);
+}
+
+:root[data-theme="dark"] {
+  --bg: #131419;
+  --surface: #1b1d24;
+  --surface-raised: #22262f;
+  --field: #262a34;
+  --border: #2e323d;
+  --hover: rgba(255, 255, 255, 0.05);
+  --text: #e8e9ef;
+  --text-muted: #9a9fb0;
+  --text-faint: #656b79;
+  --accent-hover: #4ba3f0;
+  --accent-active: #66b4f2;
+  --accent-soft: rgba(46, 144, 232, 0.18);
+  --focus: rgba(46, 144, 232, 0.55);
+  --pos: #1fdb97;
+  --neg: #ff6469;
+  --success: #1fdb97;
+  --warning: #e7a93c;
+  --warning-soft: rgba(231, 169, 60, 0.16);
+  --danger: #ff6469;
+  --info: #4ba3f0;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* --- 基本リセットとベース --- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 金額など桁をそろえる数字に使う */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+
+/* キーボード操作時のフォーカスを必ず可視化 */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}

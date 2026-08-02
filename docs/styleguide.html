@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>スタイルガイド</title>
+    <style>
+      :root { font-family: system-ui, -apple-system, sans-serif; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #0f1013; color: #e8e9ef; padding: 32px; }
+      h1 { font-size: 24px; margin: 0 0 4px; }
+      h2 { font-size: 16px; margin: 32px 0 12px; opacity: 0.7; font-weight: 600; }
+      p.lead { opacity: 0.6; margin: 0 0 8px; font-size: 13px; }
+      .row { display: flex; flex-wrap: wrap; gap: 12px; }
+      .swatch { width: 150px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+      .chip { height: 72px; }
+      .meta { padding: 8px 10px; font-size: 12px; background: rgba(255,255,255,0.04); }
+      .meta .name { font-weight: 600; }
+      .meta .hex { opacity: 0.6; font-family: ui-monospace, monospace; }
+      .gradient { height: 56px; border-radius: 12px; margin-top: 4px;
+        background: linear-gradient(to right, #2e90e8, #9b4fe8, #e24e97); }
+      .themes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+      @media (max-width: 640px) { .themes { grid-template-columns: 1fr; } }
+      .theme-card { border-radius: 14px; padding: 18px; border: 1px solid rgba(255,255,255,0.1); }
+      .theme-card h3 { margin: 0 0 12px; font-size: 14px; }
+      .line { display: flex; align-items: center; gap: 12px; padding: 7px 0; }
+      .dot { width: 34px; height: 34px; border-radius: 8px; flex: none; border: 1px solid rgba(128,128,128,0.35); }
+      .lbl { font-size: 13px; }
+      .lbl .hex { opacity: 0.6; font-family: ui-monospace, monospace; font-size: 12px; }
+      footer { margin-top: 36px; opacity: 0.45; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <h1>スタイルガイド</h1>
+    <p class="lead">カラートークンの視覚リファレンス。値の本体は <code>src/index.css</code>、仕様は <code>docs/design.md</code>。</p>
+
+    <h2>アクセント3色（プロジェクトの主役のブランドカラー）</h2>
+    <p class="lead">水色 → パープル → ピンク。ライト・ダーク 両テーマとも配色検証をパス。</p>
+    <div class="row">
+      <div class="swatch"><div class="chip" style="background:#2e90e8"></div>
+        <div class="meta"><div class="name">brand-blue</div><div class="hex">#2E90E8</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#9b4fe8"></div>
+        <div class="meta"><div class="name">brand-purple</div><div class="hex">#9B4FE8</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#e24e97"></div>
+        <div class="meta"><div class="name">brand-pink</div><div class="hex">#E24E97</div></div></div>
+    </div>
+    <div class="gradient"></div>
+
+    <h2>ニュートラル（背景・文字・線）</h2>
+    <div class="themes">
+      <!-- ライト -->
+      <div class="theme-card" style="background:#fdfdff; color:#1a1b22; border-color:#e4e6ee;">
+        <h3>☀️ ライトテーマ</h3>
+        <div class="line"><span class="dot" style="background:#fdfdff"></span><span class="lbl">背景（ベース） <span class="hex">#FDFDFF</span></span></div>
+        <div class="line"><span class="dot" style="background:#f6f7fb"></span><span class="lbl">サブ背景（カード） <span class="hex">#F6F7FB</span></span></div>
+        <div class="line"><span class="dot" style="background:#eceef5"></span><span class="lbl">入力欄背景 <span class="hex">#ECEEF5</span></span></div>
+        <div class="line"><span class="dot" style="background:#e4e6ee"></span><span class="lbl">区切り線・枠線 <span class="hex">#E4E6EE</span></span></div>
+        <div class="line"><span class="dot" style="background:#1a1b22"></span><span class="lbl">テキスト（メイン） <span class="hex">#1A1B22</span></span></div>
+        <div class="line"><span class="dot" style="background:#6b6f7e"></span><span class="lbl">テキスト（サブ） <span class="hex">#6B6F7E</span></span></div>
+      </div>
+      <!-- ダーク -->
+      <div class="theme-card" style="background:#131419; color:#e8e9ef; border-color:#2e323d;">
+        <h3>🌙 ダークテーマ</h3>
+        <div class="line"><span class="dot" style="background:#131419"></span><span class="lbl">背景（ベース） <span class="hex">#131419</span></span></div>
+        <div class="line"><span class="dot" style="background:#1b1d24"></span><span class="lbl">サブ背景（カード） <span class="hex">#1B1D24</span></span></div>
+        <div class="line"><span class="dot" style="background:#262a34"></span><span class="lbl">入力欄背景 <span class="hex">#262A34</span></span></div>
+        <div class="line"><span class="dot" style="background:#2e323d"></span><span class="lbl">区切り線・枠線 <span class="hex">#2E323D</span></span></div>
+        <div class="line"><span class="dot" style="background:#e8e9ef"></span><span class="lbl">テキスト（メイン） <span class="hex">#E8E9EF</span></span></div>
+        <div class="line"><span class="dot" style="background:#9a9fb0"></span><span class="lbl">テキスト（サブ） <span class="hex">#9A9FB0</span></span></div>
+      </div>
+    </div>
+
+    <h2>セマンティックカラー（増減・成否）</h2>
+    <p class="lead">「増えた／成功」「減った／エラー」など、意味を持つ数字や状態に使う色です。</p>
+    <div class="row">
+      <div class="swatch"><div class="chip" style="background:#05D48C"></div>
+        <div class="meta"><div class="name">プラス・増加・成功</div><div class="hex">#05D48C</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#4CAF50"></div>
+        <div class="meta"><div class="name">グラフの上昇（陽）</div><div class="hex">#4CAF50</div></div></div>
+    </div>
+    <div class="row">
+      <div class="swatch"><div class="chip" style="background:#EF454A"></div>
+        <div class="meta"><div class="name">マイナス・減少・エラー</div><div class="hex">#EF454A</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#B40000"></div>
+        <div class="meta"><div class="name">グラフの下降（陰）</div><div class="hex">#B40000</div></div></div>
+    </div>
+
+    <h2>インタラクティブ / リンク</h2>
+    <p class="lead">クリックできる文字（リンク）や操作要素の色。両テーマで読みやすいコントラストを確保する。</p>
+    <div class="themes">
+      <div class="theme-card" style="background:#fdfdff; color:#1a1b22; border-color:#e4e6ee;">
+        <h3>☀️ ライト</h3>
+        <div class="line"><span class="dot" style="background:#2379cc"></span><span class="lbl">リンク（通常） <span class="hex">#2379CC</span></span></div>
+        <div class="line"><span class="dot" style="background:#1b5fa8"></span><span class="lbl">リンク（ホバー） <span class="hex">#1B5FA8</span></span></div>
+        <div class="line"><span class="dot" style="background:#2e90e8"></span><span class="lbl">主役ボタン等 <span class="hex">#2E90E8</span></span></div>
+      </div>
+      <div class="theme-card" style="background:#131419; color:#e8e9ef; border-color:#2e323d;">
+        <h3>🌙 ダーク</h3>
+        <div class="line"><span class="dot" style="background:#6fb6f3"></span><span class="lbl">リンク（通常） <span class="hex">#6FB6F3</span></span></div>
+        <div class="line"><span class="dot" style="background:#93c8f8"></span><span class="lbl">リンク（ホバー） <span class="hex">#93C8F8</span></span></div>
+        <div class="line"><span class="dot" style="background:#4ba3f0"></span><span class="lbl">主役ボタン等 <span class="hex">#4BA3F0</span></span></div>
+      </div>
+    </div>
+    <p class="lead">💡 <b>役割</b>：リンク（通常）＝本文中のクリックできる文字。ホバー＝マウスを乗せた時。<b>ダークでは主役ブルーより明るめの青</b>にして、暗い背景でも視認性（コントラスト比）を確保するのがコツ。小さい文字ほど明るさが要る。</p>
+
+    <h2>予備カラー</h2>
+    <p class="lead">アプリに合わせて自由に足していくための予備。</p>
+    <div class="row">
+      <div class="swatch"><div class="chip" style="background:#FFDF96"></div>
+        <div class="meta"><div class="name">やさしいパステルイエロー</div><div class="hex">#FFDF96</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#22c55e"></div>
+        <div class="meta"><div class="name">アクセントグリーン</div><div class="hex">#22C55E</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#1b1d24; position:relative;">
+        <div style="position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(154,159,176,0.6);"></div></div>
+        <div class="meta"><div class="name">罫線・区切り</div><div class="hex">--grid-line</div></div></div>
+    </div>
+
+    <footer>色を変えるときは src/index.css と docs/design.md、本ファイルを更新する。</footer>
+  </body>
+</html>

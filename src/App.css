@@ -1,0 +1,640 @@
+/* アプリシェルのスタイル（色・文字・余白のトークンは index.css を参照） */
+
+/* ===== レイアウト（アプリシェル） ===== */
+.app {
+  display: grid;
+  grid-template-columns: 224px 1fr;
+  min-height: 100vh;
+  transition: grid-template-columns 0.18s ease;
+}
+.app.collapsed {
+  grid-template-columns: 72px 1fr;
+}
+/* ===== レスポンシブ =====
+   中間幅（〜1024px）は JS 側で自動的にアイコンレール（.collapsed）にする。
+   モバイル（〜640px）はサイドバーをドロワー化する。 */
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 36px;
+  border: 1px solid var(--border);
+  background: var(--field);
+  color: var(--text);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 0;
+}
+.hamburger svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 55;
+}
+.app.mobile {
+  grid-template-columns: 1fr;
+}
+.app.mobile .side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 264px;
+  transform: translateX(-100%);
+  transition: transform 0.22s ease;
+  z-index: 60;
+  box-shadow: var(--shadow-md);
+}
+.app.mobile.drawer-open .side {
+  transform: translateX(0);
+}
+.app.mobile .hamburger {
+  display: inline-flex;
+}
+.app.mobile .search,
+.app.mobile .yr {
+  display: none;
+}
+.app.mobile .topbar {
+  padding: 12px 16px;
+}
+.app.mobile .content {
+  padding: 18px 16px 40px;
+}
+
+/* アイコンレール（折りたたみ）時のツールチップ：ホバーで右にラベル表示 */
+.app.collapsed .nav::after {
+  content: attr(data-label);
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--surface-raised);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s;
+  z-index: 70;
+}
+.app.collapsed .nav:hover::after {
+  opacity: 1;
+}
+
+/* レール時はナビのはみ出しを許可（ツールチップを右に表示させるため） */
+.app.collapsed .navscroll {
+  overflow: visible;
+}
+
+/* 中間幅：レールから暗幕付きオーバーレイで全開（コンテンツはそのまま・暗幕で暗くなる） */
+.app.medium {
+  grid-template-columns: 72px 1fr;
+}
+.app.medium.drawer-open .side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 224px;
+  z-index: 60;
+  box-shadow: var(--shadow-md);
+}
+/* side が浮いてもコンテンツを2列目に固定（潰れ防止） */
+.app.medium.drawer-open .main {
+  grid-column: 2;
+}
+
+/* ===== サイドバー ===== */
+.side {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  overflow: visible;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 16px 6px;
+}
+.brand .mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--brand-gradient);
+  flex: none;
+  box-shadow: var(--shadow-sm);
+}
+.brand .wordmark {
+  flex: 1;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.brand .g {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* レール時：ブランドアイコンにホバーすると展開アイコンに変化 */
+.brand .mark {
+  position: relative;
+}
+.brand .mark-hint {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--field);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+}
+.brand .mark-hint svg {
+  width: 16px;
+  height: 16px;
+}
+.app.collapsed .brand {
+  cursor: pointer;
+}
+.app.collapsed .brand:hover .mark-hint {
+  display: flex;
+}
+/* レールでは丸トグルは隠す（ブランド自体がトグルになるため） */
+.app.collapsed .brand .collapse {
+  display: none;
+}
+/* 狭い幅（中間・モバイル）は暗幕/項目クリックで閉じるので、ピルは出さない（広い幅専用） */
+.app.medium .brand .collapse,
+.app.mobile .brand .collapse {
+  display: none;
+}
+/* 折りたたみトグル：右の境界線上に乗る小さな丸ボタン */
+.brand .collapse {
+  position: absolute;
+  top: 26px;
+  right: -8px;
+  width: 16px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  z-index: 20;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.brand .collapse:hover {
+  background: var(--field);
+  color: var(--text);
+}
+.brand .collapse svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s;
+}
+.app.collapsed .brand {
+  justify-content: center;
+  padding: 8px 0 16px;
+}
+.app.collapsed .wordmark {
+  display: none;
+}
+.app.collapsed .collapse svg {
+  transform: rotate(180deg);
+}
+
+.navscroll {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  margin: 8px -6px;
+  padding: 0 6px;
+  scrollbar-width: none;
+}
+.navscroll::-webkit-scrollbar {
+  display: none;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 16px;
+  position: relative;
+  user-select: none;
+}
+.nav:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+.nav.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+.ic {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.app.collapsed .nav {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+.app.collapsed .lbl {
+  display: none;
+}
+
+/* 常設の作成ボタン */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 4px 10px;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 11px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.cta:hover {
+  background: var(--accent-hover);
+}
+.app.collapsed .cta {
+  align-self: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  margin: 8px auto;
+}
+
+/* アカウント ＋ ポップオーバー */
+.userbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid var(--border);
+  margin-top: 6px;
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+.userbox:hover {
+  background: var(--hover);
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-gradient);
+  flex: none;
+}
+.userbox .nm {
+  font-size: 13px;
+  font-weight: 600;
+}
+.chip {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+.uchev {
+  width: 16px;
+  height: 16px;
+  stroke: var(--text-faint);
+  fill: none;
+  stroke-width: 2;
+  flex: none;
+  margin-left: auto;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.acct-menu {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 8px;
+  z-index: 40;
+}
+.userbox.open .acct-menu {
+  display: block;
+}
+.am-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px 10px;
+}
+.am-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.am-div {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 4px;
+}
+.am-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 9px 8px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+}
+.am-item:hover {
+  background: var(--hover);
+}
+.am-item svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-muted);
+  fill: none;
+  stroke-width: 1.8;
+  flex: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.app.collapsed .uchev {
+  display: none;
+}
+.app.collapsed .uinfo {
+  display: none;
+}
+.app.collapsed .userbox {
+  justify-content: center;
+}
+.app.collapsed .acct-menu {
+  left: 10px;
+  right: auto;
+  width: 220px;
+}
+
+/* ===== メイン ===== */
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  z-index: 5;
+}
+.topbar h1 {
+  font-size: 25px;
+  margin: 0;
+  font-weight: 700;
+}
+.topbar .grow {
+  flex: 1;
+}
+.yr {
+  font-size: 14px;
+  color: var(--text-muted);
+  background: var(--field);
+  border: 1px solid var(--border);
+  padding: 7px 13px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+.search {
+  background: var(--field);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 8px 13px;
+  color: var(--text);
+  font-size: 14px;
+  min-width: 200px;
+  font-family: inherit;
+}
+.search::placeholder {
+  color: var(--text-muted);
+}
+.tgl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--field);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-md);
+  width: 38px;
+  height: 36px;
+  cursor: pointer;
+  padding: 0;
+}
+.tgl:hover {
+  background: var(--hover);
+}
+.tgl svg {
+  width: 18px;
+  height: 18px;
+}
+
+.content {
+  padding: 24px 28px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ===== 画面共通 ===== */
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* 画面内タブ */
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+}
+.tab {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tab:hover {
+  color: var(--text);
+}
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+/* データテーブル */
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+table.data th,
+table.data td {
+  text-align: left;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+}
+table.data th {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 600;
+}
+table.data tbody tr:last-child td {
+  border-bottom: none;
+}
+table.data tbody tr:hover {
+  background: var(--hover);
+}
+.muted {
+  color: var(--text-muted);
+}
+.pill {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--field);
+  color: var(--text-muted);
+}
+.error {
+  color: var(--danger);
+  font-size: 14px;
+}
+
+/* ホーム */
+.welcome {
+  padding: 26px;
+}
+.welcome h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+.welcome p {
+  color: var(--text-muted);
+  margin: 0 0 18px;
+  max-width: 60ch;
+}
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.stat-num {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.stat-lbl {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* 準備中 */
+.empty {
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+.empty-badge {
+  font-size: 38px;
+  margin-bottom: 8px;
+}
+.empty h2 {
+  margin: 0 0 6px;
+  color: var(--text);
+  font-size: 18px;
+}
+.empty p {
+  margin: 0;
+  font-size: 14px;
+}

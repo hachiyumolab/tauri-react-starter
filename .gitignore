@@ -1,0 +1,44 @@
+# === Git管理しないメモ置き場 ===
+private-notes/
+
+# === 秘密情報（絶対にコミットしない） ===
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.keystore
+*.jks
+credentials.json
+secrets/
+
+# === ローカルデータ（DB・共有しない） ===
+*.sqlite
+*.sqlite3
+*.db
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.db-journal
+# バックアップ・書き出しデータ
+*.bak
+*.dump
+backup/
+
+# === ログ ===
+*.log
+logs/
+
+# === 依存パッケージ・ビルド成果物 ===
+node_modules/
+dist/
+build/
+# Rust / Tauri
+target/
+src-tauri/target/
+
+# === OS / エディタ ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
