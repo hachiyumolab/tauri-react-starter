@@ -18,7 +18,7 @@
       .meta .name { font-weight: 600; }
       .meta .hex { opacity: 0.6; font-family: ui-monospace, monospace; }
       .gradient { height: 56px; border-radius: 12px; margin-top: 4px;
-        background: linear-gradient(to right, #2e90e8, #9b4fe8, #e24e97); }
+        background: linear-gradient(to right, #54a1e8, #a154e8, #e8549c); }
       .themes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
       @media (max-width: 640px) { .themes { grid-template-columns: 1fr; } }
       .theme-card { border-radius: 14px; padding: 18px; border: 1px solid rgba(255,255,255,0.1); }
@@ -34,39 +34,42 @@
     <h1>スタイルガイド</h1>
     <p class="lead">カラートークンの視覚リファレンス。値の本体は <code>src/index.css</code>、仕様は <code>docs/design.md</code>。</p>
 
-    <h2>アクセント3色（プロジェクトの主役のブランドカラー）</h2>
-    <p class="lead">水色 → パープル → ピンク。ライト・ダーク 両テーマとも配色検証をパス。</p>
+    <h2>ブランドカラー（アクセント3色 ＋ ゴールドの差し色）</h2>
+    <p class="lead">水色 → パープル → ピンク。＋ 蜜色のゴールドを“ひとつまみ”。ライト・ダーク 両テーマとも配色検証をパス。</p>
     <div class="row">
-      <div class="swatch"><div class="chip" style="background:#2e90e8"></div>
-        <div class="meta"><div class="name">brand-blue</div><div class="hex">#2E90E8</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#9b4fe8"></div>
-        <div class="meta"><div class="name">brand-purple</div><div class="hex">#9B4FE8</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#e24e97"></div>
-        <div class="meta"><div class="name">brand-pink</div><div class="hex">#E24E97</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#54a1e8"></div>
+        <div class="meta"><div class="name">brand-blue</div><div class="hex">#54A1E8</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#a154e8"></div>
+        <div class="meta"><div class="name">brand-purple</div><div class="hex">#A154E8</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#e8549c"></div>
+        <div class="meta"><div class="name">brand-pink</div><div class="hex">#E8549C</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#ffc24b"></div>
+        <div class="meta"><div class="name">brand-gold（差し色）</div><div class="hex">#FFC24B</div></div></div>
     </div>
     <div class="gradient"></div>
+    <p class="lead" style="margin-top:10px">🍯 <b>ゴールドの使い方</b>：面積は最小・前面に一点だけ（お気に入り・特別な強調など）。明るい地の小さな文字/線は <b style="color:#b9820f">濃い金 #B9820F</b>、暗い地は <b style="color:#ffcf6b">明るい金 #FFCF6B</b> で視認性を確保。</p>
 
     <h2>ニュートラル（背景・文字・線）</h2>
     <div class="themes">
       <!-- ライト -->
-      <div class="theme-card" style="background:#fdfdff; color:#1a1b22; border-color:#e4e6ee;">
+      <div class="theme-card" style="background:#fcfbfe; color:#1d1a26; border-color:#e4dfef;">
         <h3>☀️ ライトテーマ</h3>
-        <div class="line"><span class="dot" style="background:#fdfdff"></span><span class="lbl">背景（ベース） <span class="hex">#FDFDFF</span></span></div>
-        <div class="line"><span class="dot" style="background:#f6f7fb"></span><span class="lbl">サブ背景（カード） <span class="hex">#F6F7FB</span></span></div>
-        <div class="line"><span class="dot" style="background:#eceef5"></span><span class="lbl">入力欄背景 <span class="hex">#ECEEF5</span></span></div>
-        <div class="line"><span class="dot" style="background:#e4e6ee"></span><span class="lbl">区切り線・枠線 <span class="hex">#E4E6EE</span></span></div>
-        <div class="line"><span class="dot" style="background:#1a1b22"></span><span class="lbl">テキスト（メイン） <span class="hex">#1A1B22</span></span></div>
-        <div class="line"><span class="dot" style="background:#6b6f7e"></span><span class="lbl">テキスト（サブ） <span class="hex">#6B6F7E</span></span></div>
+        <div class="line"><span class="dot" style="background:#fcfbfe"></span><span class="lbl">背景（ベース） <span class="hex">#FCFBFE</span></span></div>
+        <div class="line"><span class="dot" style="background:#f5f3fb"></span><span class="lbl">サブ背景（カード） <span class="hex">#F5F3FB</span></span></div>
+        <div class="line"><span class="dot" style="background:#ece8f5"></span><span class="lbl">入力欄背景 <span class="hex">#ECE8F5</span></span></div>
+        <div class="line"><span class="dot" style="background:#e4dfef"></span><span class="lbl">区切り線・枠線 <span class="hex">#E4DFEF</span></span></div>
+        <div class="line"><span class="dot" style="background:#1d1a26"></span><span class="lbl">テキスト（メイン） <span class="hex">#1D1A26</span></span></div>
+        <div class="line"><span class="dot" style="background:#6c667c"></span><span class="lbl">テキスト（サブ） <span class="hex">#6C667C</span></span></div>
       </div>
       <!-- ダーク -->
-      <div class="theme-card" style="background:#131419; color:#e8e9ef; border-color:#2e323d;">
+      <div class="theme-card" style="background:#14101f; color:#ece8f6; border-color:#332c4a;">
         <h3>🌙 ダークテーマ</h3>
-        <div class="line"><span class="dot" style="background:#131419"></span><span class="lbl">背景（ベース） <span class="hex">#131419</span></span></div>
-        <div class="line"><span class="dot" style="background:#1b1d24"></span><span class="lbl">サブ背景（カード） <span class="hex">#1B1D24</span></span></div>
-        <div class="line"><span class="dot" style="background:#262a34"></span><span class="lbl">入力欄背景 <span class="hex">#262A34</span></span></div>
-        <div class="line"><span class="dot" style="background:#2e323d"></span><span class="lbl">区切り線・枠線 <span class="hex">#2E323D</span></span></div>
-        <div class="line"><span class="dot" style="background:#e8e9ef"></span><span class="lbl">テキスト（メイン） <span class="hex">#E8E9EF</span></span></div>
-        <div class="line"><span class="dot" style="background:#9a9fb0"></span><span class="lbl">テキスト（サブ） <span class="hex">#9A9FB0</span></span></div>
+        <div class="line"><span class="dot" style="background:#14101f"></span><span class="lbl">背景（ベース） <span class="hex">#14101F</span></span></div>
+        <div class="line"><span class="dot" style="background:#1c1830"></span><span class="lbl">サブ背景（カード） <span class="hex">#1C1830</span></span></div>
+        <div class="line"><span class="dot" style="background:#282340"></span><span class="lbl">入力欄背景 <span class="hex">#282340</span></span></div>
+        <div class="line"><span class="dot" style="background:#332c4a"></span><span class="lbl">区切り線・枠線 <span class="hex">#332C4A</span></span></div>
+        <div class="line"><span class="dot" style="background:#ece8f6"></span><span class="lbl">テキスト（メイン） <span class="hex">#ECE8F6</span></span></div>
+        <div class="line"><span class="dot" style="background:#a49dbb"></span><span class="lbl">テキスト（サブ） <span class="hex">#A49DBB</span></span></div>
       </div>
     </div>
 
@@ -88,17 +91,17 @@
     <h2>インタラクティブ / リンク</h2>
     <p class="lead">クリックできる文字（リンク）や操作要素の色。両テーマで読みやすいコントラストを確保する。</p>
     <div class="themes">
-      <div class="theme-card" style="background:#fdfdff; color:#1a1b22; border-color:#e4e6ee;">
+      <div class="theme-card" style="background:#fcfbfe; color:#1d1a26; border-color:#e4dfef;">
         <h3>☀️ ライト</h3>
-        <div class="line"><span class="dot" style="background:#2379cc"></span><span class="lbl">リンク（通常） <span class="hex">#2379CC</span></span></div>
-        <div class="line"><span class="dot" style="background:#1b5fa8"></span><span class="lbl">リンク（ホバー） <span class="hex">#1B5FA8</span></span></div>
-        <div class="line"><span class="dot" style="background:#2e90e8"></span><span class="lbl">主役ボタン等 <span class="hex">#2E90E8</span></span></div>
+        <div class="line"><span class="dot" style="background:#2881e2"></span><span class="lbl">リンク（通常） <span class="hex">#2881E2</span></span></div>
+        <div class="line"><span class="dot" style="background:#1c70ca"></span><span class="lbl">リンク（ホバー） <span class="hex">#1C70CA</span></span></div>
+        <div class="line"><span class="dot" style="background:#54a1e8"></span><span class="lbl">主役ボタン等 <span class="hex">#54A1E8</span></span></div>
       </div>
-      <div class="theme-card" style="background:#131419; color:#e8e9ef; border-color:#2e323d;">
+      <div class="theme-card" style="background:#14101f; color:#ece8f6; border-color:#332c4a;">
         <h3>🌙 ダーク</h3>
-        <div class="line"><span class="dot" style="background:#6fb6f3"></span><span class="lbl">リンク（通常） <span class="hex">#6FB6F3</span></span></div>
-        <div class="line"><span class="dot" style="background:#93c8f8"></span><span class="lbl">リンク（ホバー） <span class="hex">#93C8F8</span></span></div>
-        <div class="line"><span class="dot" style="background:#4ba3f0"></span><span class="lbl">主役ボタン等 <span class="hex">#4BA3F0</span></span></div>
+        <div class="line"><span class="dot" style="background:#81b6ee"></span><span class="lbl">リンク（通常） <span class="hex">#81B6EE</span></span></div>
+        <div class="line"><span class="dot" style="background:#a1c8f2"></span><span class="lbl">リンク（ホバー） <span class="hex">#A1C8F2</span></span></div>
+        <div class="line"><span class="dot" style="background:#81b6ee"></span><span class="lbl">主役ボタン等 <span class="hex">#81B6EE</span></span></div>
       </div>
     </div>
     <p class="lead">💡 <b>役割</b>：リンク（通常）＝本文中のクリックできる文字。ホバー＝マウスを乗せた時。<b>ダークでは主役ブルーより明るめの青</b>にして、暗い背景でも視認性（コントラスト比）を確保するのがコツ。小さい文字ほど明るさが要る。</p>
@@ -110,7 +113,7 @@
         <div class="meta"><div class="name">やさしいパステルイエロー</div><div class="hex">#FFDF96</div></div></div>
       <div class="swatch"><div class="chip" style="background:#22c55e"></div>
         <div class="meta"><div class="name">アクセントグリーン</div><div class="hex">#22C55E</div></div></div>
-      <div class="swatch"><div class="chip" style="background:#1b1d24; position:relative;">
+      <div class="swatch"><div class="chip" style="background:#1c1830; position:relative;">
         <div style="position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(154,159,176,0.6);"></div></div>
         <div class="meta"><div class="name">罫線・区切り</div><div class="hex">--grid-line</div></div></div>
     </div>

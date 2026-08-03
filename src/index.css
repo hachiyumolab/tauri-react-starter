@@ -5,29 +5,34 @@
    ========================================================================= */
 
 :root {
-  /* --- 面・文字・枠（ライト既定） --- */
-  --bg: #fdfdff;
-  --surface: #f6f7fb;
+  /* --- 面・文字・枠（ライト既定：ほんのりプラム寄り） --- */
+  --bg: #fcfbfe;
+  --surface: #f5f3fb;
   --surface-raised: #ffffff;
-  --field: #eceef5;
-  --border: #e4e6ee;
-  --hover: rgba(20, 22, 30, 0.04);
-  --text: #1a1b22;
-  --text-muted: #6b6f7e;
-  --text-faint: #9aa0af;
+  --field: #ece8f5;
+  --border: #e4dfef;
+  --hover: rgba(40, 24, 64, 0.04);
+  --text: #1d1a26;
+  --text-muted: #6c667c;
+  --text-faint: #9b95aa;
   --text-on-accent: #ffffff;
 
   /* --- ブランド（主役＝ブルー） --- */
-  --accent: #2e90e8;
-  --accent-hover: #2379cc;
-  --accent-active: #1c67b4;
-  --accent-soft: rgba(46, 144, 232, 0.1);
-  --focus: rgba(46, 144, 232, 0.5);
-  --link: #2379cc;
-  --link-hover: #1b5fa8;
-  --brand-purple: #9b4fe8;
-  --brand-pink: #e24e97;
-  --brand-gradient: linear-gradient(135deg, #2e90e8, #9b4fe8, #e24e97);
+  --accent: #54a1e8;
+  --accent-hover: #2881e2;
+  --accent-active: #1c70ca;
+  --accent-soft: rgba(84, 161, 232, 0.1);
+  --focus: rgba(84, 161, 232, 0.5);
+  --link: #2881e2;
+  --link-hover: #1c70ca;
+  --brand-purple: #a154e8;
+  --brand-pink: #e8549c;
+  --brand-gradient: linear-gradient(135deg, #54a1e8, #a154e8, #e8549c);
+
+  /* --- ゴールド（差し色＝“ひとつまみ”専用） --- */
+  --gold: #ffc24b;
+  --gold-strong: #b9820f; /* 明るい地に置く小さな金（文字・線）用の読みやすい濃さ */
+  --gold-soft: rgba(255, 194, 75, 0.14);
 
   /* --- お金（純増減のみ） --- */
   --pos: #07a96e;
@@ -42,7 +47,7 @@
   --warning: #c77f0e;
   --warning-soft: #fff3d6;
   --danger: #d83a3f;
-  --info: #2e90e8;
+  --info: #54a1e8;
 
   /* --- タイポグラフィ --- */
   --font-sans: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
@@ -73,30 +78,33 @@
   --radius-xl: 18px;
   --radius-pill: 999px;
 
-  /* --- 影（控えめ） --- */
-  --shadow-sm: 0 1px 2px rgba(20, 22, 30, 0.06), 0 1px 3px rgba(20, 22, 30, 0.04);
-  --shadow-md: 0 6px 20px rgba(20, 22, 30, 0.1);
+  /* --- 影（控えめ・プラムをほんのり） --- */
+  --shadow-sm: 0 1px 2px rgba(40, 24, 64, 0.06), 0 1px 3px rgba(40, 24, 64, 0.04);
+  --shadow-md: 0 6px 20px rgba(40, 24, 64, 0.1);
 }
 
-/* --- ダーク：OS設定 --- */
+/* --- ダーク：OS設定（地をブランドのプラムへ） --- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #131419;
-    --surface: #1b1d24;
-    --surface-raised: #22262f;
-    --field: #262a34;
-    --border: #2e323d;
+    --bg: #14101f;
+    --surface: #1c1830;
+    --surface-raised: #241f3a;
+    --field: #282340;
+    --border: #332c4a;
     --hover: rgba(255, 255, 255, 0.05);
-    --text: #e8e9ef;
-    --text-muted: #9a9fb0;
-    --text-faint: #656b79;
+    --text: #ece8f6;
+    --text-muted: #a49dbb;
+    --text-faint: #6c6584;
 
-    --accent-hover: #4ba3f0;
-    --accent-active: #66b4f2;
-    --accent-soft: rgba(46, 144, 232, 0.18);
-    --focus: rgba(46, 144, 232, 0.55);
-    --link: #6fb6f3;
-    --link-hover: #93c8f8;
+    --accent-hover: #81b6ee;
+    --accent-active: #a1c8f2;
+    --accent-soft: rgba(84, 161, 232, 0.18);
+    --focus: rgba(84, 161, 232, 0.55);
+    --link: #81b6ee;
+    --link-hover: #a1c8f2;
+
+    --gold-strong: #ffcf6b;
+    --gold-soft: rgba(255, 194, 75, 0.16);
 
     --pos: #1fdb97;
     --neg: #ff6469;
@@ -105,7 +113,7 @@
     --warning: #e7a93c;
     --warning-soft: rgba(231, 169, 60, 0.16);
     --danger: #ff6469;
-    --info: #4ba3f0;
+    --info: #81b6ee;
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
@@ -114,53 +122,59 @@
 
 /* --- 手動切替（OS設定より優先） --- */
 :root[data-theme="light"] {
-  --bg: #fdfdff;
-  --surface: #f6f7fb;
+  --bg: #fcfbfe;
+  --surface: #f5f3fb;
   --surface-raised: #ffffff;
-  --field: #eceef5;
-  --border: #e4e6ee;
-  --hover: rgba(20, 22, 30, 0.04);
-  --text: #1a1b22;
-  --text-muted: #6b6f7e;
-  --text-faint: #9aa0af;
-  --accent-hover: #2379cc;
-  --accent-active: #1c67b4;
-  --accent-soft: rgba(46, 144, 232, 0.1);
-  --focus: rgba(46, 144, 232, 0.5);
-  --link: #2379cc;
-  --link-hover: #1b5fa8;
+  --field: #ece8f5;
+  --border: #e4dfef;
+  --hover: rgba(40, 24, 64, 0.04);
+  --text: #1d1a26;
+  --text-muted: #6c667c;
+  --text-faint: #9b95aa;
+  --accent-hover: #2881e2;
+  --accent-active: #1c70ca;
+  --accent-soft: rgba(84, 161, 232, 0.1);
+  --focus: rgba(84, 161, 232, 0.5);
+  --link: #2881e2;
+  --link-hover: #1c70ca;
+  --gold-strong: #b9820f;
+  --gold-soft: rgba(255, 194, 75, 0.14);
   --pos: #07a96e;
   --neg: #d83a3f;
   --success: #07a96e;
   --warning: #c77f0e;
   --warning-soft: #fff3d6;
   --danger: #d83a3f;
-  --info: #2e90e8;
-  --shadow-sm: 0 1px 2px rgba(20, 22, 30, 0.06), 0 1px 3px rgba(20, 22, 30, 0.04);
-  --shadow-md: 0 6px 20px rgba(20, 22, 30, 0.1);
+  --info: #54a1e8;
+  --shadow-sm: 0 1px 2px rgba(40, 24, 64, 0.06), 0 1px 3px rgba(40, 24, 64, 0.04);
+  --shadow-md: 0 6px 20px rgba(40, 24, 64, 0.1);
 }
 
 :root[data-theme="dark"] {
-  --bg: #131419;
-  --surface: #1b1d24;
-  --surface-raised: #22262f;
-  --field: #262a34;
-  --border: #2e323d;
+  --bg: #14101f;
+  --surface: #1c1830;
+  --surface-raised: #241f3a;
+  --field: #282340;
+  --border: #332c4a;
   --hover: rgba(255, 255, 255, 0.05);
-  --text: #e8e9ef;
-  --text-muted: #9a9fb0;
-  --text-faint: #656b79;
-  --accent-hover: #4ba3f0;
-  --accent-active: #66b4f2;
-  --accent-soft: rgba(46, 144, 232, 0.18);
-  --focus: rgba(46, 144, 232, 0.55);
+  --text: #ece8f6;
+  --text-muted: #a49dbb;
+  --text-faint: #6c6584;
+  --accent-hover: #81b6ee;
+  --accent-active: #a1c8f2;
+  --accent-soft: rgba(84, 161, 232, 0.18);
+  --focus: rgba(84, 161, 232, 0.55);
+  --link: #81b6ee;
+  --link-hover: #a1c8f2;
+  --gold-strong: #ffcf6b;
+  --gold-soft: rgba(255, 194, 75, 0.16);
   --pos: #1fdb97;
   --neg: #ff6469;
   --success: #1fdb97;
   --warning: #e7a93c;
   --warning-soft: rgba(231, 169, 60, 0.16);
   --danger: #ff6469;
-  --info: #4ba3f0;
+  --info: #81b6ee;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
