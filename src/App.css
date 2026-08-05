@@ -1,14 +1,33 @@
 /* アプリシェルのスタイル（色・文字・余白のトークンは index.css を参照） */
 
+/* ===== サイドバーの寸法トークン =====
+   レール（折りたたみ）時、アイコンはサイドバーの中央に来る。
+   展開時も各アイコンの「中心」を同じXに合わせると、開閉でアイコンが横に動かない。
+   そのための左パディングは (レールのコンテンツ幅 − アイコン幅) / 2 で求まる。
+   数値をベタ書きせず、ここのトークンから calc() で導出する。 */
+:root {
+  --side-w: 224px; /* 展開時のサイドバー幅 */
+  --rail-w: 72px; /* レール（折りたたみ）時のサイドバー幅 */
+  --side-pad-x: 14px; /* サイドバーの左右パディング */
+  --side-border-w: 1px; /* サイドバー右端の境界線（box-sizing: border-box なので幅を食う） */
+  /* レール時に中身が使える幅（＝アイコンが中央寄せされる基準幅）
+     72 − 1(右ボーダー) − 14×2(左右パディング) = 43px */
+  --rail-content-w: calc(var(--rail-w) - var(--side-border-w) - var(--side-pad-x) * 2);
+  /* サイドバー先頭に並ぶアイコン類のサイズ */
+  --icon-nav: 24px; /* ナビ項目のアイコン */
+  --icon-mark: 30px; /* ブランドロゴのマーク */
+  --icon-avatar: 32px; /* アカウント欄のアバター */
+}
+
 /* ===== レイアウト（アプリシェル） ===== */
 .app {
   display: grid;
-  grid-template-columns: 224px 1fr;
+  grid-template-columns: var(--side-w) 1fr;
   min-height: 100vh;
   transition: grid-template-columns 0.18s ease;
 }
 .app.collapsed {
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: var(--rail-w) 1fr;
 }
 /* ===== レスポンシブ =====
    中間幅（〜1024px）は JS 側で自動的にアイコンレール（.collapsed）にする。
@@ -102,14 +121,14 @@
 
 /* 中間幅：レールから暗幕付きオーバーレイで全開（コンテンツはそのまま・暗幕で暗くなる） */
 .app.medium {
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: var(--rail-w) 1fr;
 }
 .app.medium.drawer-open .side {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  width: 224px;
+  width: var(--side-w);
   z-index: 60;
   box-shadow: var(--shadow-md);
 }
@@ -121,13 +140,13 @@
 /* ===== サイドバー ===== */
 .side {
   background: var(--surface);
-  border-right: 1px solid var(--border);
+  border-right: var(--side-border-w) solid var(--border);
   position: sticky;
   top: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 18px 14px;
+  padding: 18px var(--side-pad-x);
   overflow: visible;
   z-index: 10;
 }
@@ -138,14 +157,16 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  height: 30px;
+  height: var(--icon-mark);
   margin: 8px 0 16px;
-  padding: 0 0 0 6px;
+  /* 左パディング = (レールのコンテンツ幅 − マーク幅) / 2。
+     レール時に中央寄せされるマークと、展開時のマークのXを一致させる */
+  padding: 0 0 0 calc((var(--rail-content-w) - var(--icon-mark)) / 2);
   flex: none;
 }
 .brand .mark {
-  width: 30px;
-  height: 30px;
+  width: var(--icon-mark);
+  height: var(--icon-mark);
   border-radius: 9px;
   background: var(--brand-gradient);
   flex: none;
@@ -258,7 +279,9 @@
   align-items: center;
   gap: 11px;
   height: 44px;
-  padding: 0 14px;
+  /* 左パディング = (レールのコンテンツ幅 − アイコン幅) / 2。
+     レール時に中央寄せされるアイコンと、展開時のアイコンのXを一致させる */
+  padding: 0 14px 0 calc((var(--rail-content-w) - var(--icon-nav)) / 2);
   flex: none;
   border-radius: var(--radius-md);
   color: var(--text-muted);
@@ -277,8 +300,8 @@
   font-weight: 600;
 }
 .ic {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-nav);
+  height: var(--icon-nav);
   flex: none;
   stroke: currentColor;
   stroke-width: 1.8;
@@ -337,7 +360,9 @@
   align-items: center;
   gap: 10px;
   height: 58px;
-  padding: 0 10px;
+  /* 左パディング = (レールのコンテンツ幅 − アバター幅) / 2。
+     レール時に中央寄せされるアバターと、展開時のアバターのXを一致させる */
+  padding: 0 10px 0 calc((var(--rail-content-w) - var(--icon-avatar)) / 2);
   border-top: 1px solid var(--border);
   margin-top: 6px;
   flex: none;
@@ -349,8 +374,8 @@
   background: var(--hover);
 }
 .avatar {
-  width: 32px;
-  height: 32px;
+  width: var(--icon-avatar);
+  height: var(--icon-avatar);
   border-radius: var(--radius-pill);
   background: var(--brand-gradient);
   flex: none;
@@ -456,6 +481,10 @@
 }
 .app.collapsed .userbox {
   justify-content: center;
+  /* 高さ(58px)と border-top は展開時と共通。左右のインデントだけ外して中央寄せにする
+     （左右パディングが残っていると中央寄せの中心がズレるため） */
+  padding-left: 0;
+  padding-right: 0;
 }
 .app.collapsed .acct-menu {
   left: 10px;
