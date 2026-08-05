@@ -132,11 +132,16 @@
   z-index: 10;
 }
 
+/* ブランド行：高さをマーク(30px)で固定し、上下の余白は margin で確保する。
+   （縦 padding だと文字の行高に引っ張られて、レール⇄展開で高さが変わってしまう） */
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 0 16px 6px;
+  height: 30px;
+  margin: 8px 0 16px;
+  padding: 0 0 0 6px;
+  flex: none;
 }
 .brand .mark {
   width: 30px;
@@ -152,6 +157,8 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   white-space: nowrap;
+  /* 行の高さをマーク(30px)より低く保つ。1.6 のままだと 35.2px になり行が膨らむ */
+  line-height: 1;
 }
 .brand .g {
   background: var(--brand-gradient);
@@ -222,7 +229,8 @@
 }
 .app.collapsed .brand {
   justify-content: center;
-  padding: 8px 0 16px;
+  /* height と margin は展開時と共通。左のインデントだけ外して中央寄せにする */
+  padding: 0;
 }
 .app.collapsed .wordmark {
   display: none;
@@ -244,11 +252,14 @@
 .navscroll::-webkit-scrollbar {
   display: none;
 }
+/* ナビ項目：高さを固定。ラベルの有無（=行の高さ）で高さが変わらないようにする */
 .nav {
   display: flex;
   align-items: center;
   gap: 11px;
-  padding: 10px 14px;
+  height: 44px;
+  padding: 0 14px;
+  flex: none;
   border-radius: var(--radius-md);
   color: var(--text-muted);
   cursor: pointer;
@@ -277,6 +288,7 @@
 }
 .app.collapsed .nav {
   justify-content: center;
+  /* 高さ(44px)は展開時と共通。左右のインデントだけ外す */
   padding-left: 0;
   padding-right: 0;
 }
@@ -284,18 +296,22 @@
   display: none;
 }
 
-/* 常設の作成ボタン */
+/* 常設の作成ボタン。
+   縦の占有量（上margin + height + 下margin = 4+46+10 = 60px）を
+   レール時と展開時で完全に一致させる */
 .cta {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  height: 46px;
   margin: 4px 4px 10px;
+  flex: none;
   background: var(--accent);
   color: var(--text-on-accent);
   border: none;
   border-radius: var(--radius-md);
-  padding: 11px 12px;
+  padding: 0 12px;
   font-size: 15px;
   font-weight: 600;
   font-family: inherit;
@@ -308,19 +324,23 @@
 .app.collapsed .cta {
   align-self: center;
   width: 46px;
-  height: 46px;
+  /* height(46px) と上下 margin(4px / 10px) は展開時と共通にする */
   padding: 0;
-  margin: 8px auto;
+  margin: 4px auto 10px;
 }
 
 /* アカウント ＋ ポップオーバー */
+/* アカウント欄：高さを固定する。
+   ここは下端に置かれるので、高さが変わると上端＝区切り線(border-top)が上下してしまう */
 .userbox {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;
+  height: 58px;
+  padding: 0 10px;
   border-top: 1px solid var(--border);
   margin-top: 6px;
+  flex: none;
   position: relative;
   cursor: pointer;
   border-radius: var(--radius-md);
@@ -334,6 +354,15 @@
   border-radius: var(--radius-pill);
   background: var(--brand-gradient);
   flex: none;
+}
+/* ユーザー情報：行間を詰めて、固定した .userbox の高さ(58px)に確実に収める */
+.uinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+  line-height: 1.3;
 }
 .userbox .nm {
   font-size: 13px;
