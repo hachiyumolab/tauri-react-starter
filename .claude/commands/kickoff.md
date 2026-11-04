@@ -94,7 +94,7 @@ Phase 1 の合意を [`docs/requirements.md`](../../docs/requirements.md) の穴
   git branch -D main 2>/dev/null || git branch -D master 2>/dev/null || true
   git branch -m main
   ```
-- GitHub に上げる場合は、リモート作成と初回 push を案内（**push は必ず開発者の確認を取ってから**）。
+- GitHub に上げる場合は、**まず新しいプロダクト用のリポジトリを作成し、`git remote`をそちらに向け直してから**（`git remote set-url origin <新リポジトリURL>` または `git remote add`）push する。**`tauri-react-starter` 自身のリモートに push しないこと**。push前に `git remote -v` で向き先を必ず確認する（push は必ず開発者の確認を取ってから）。
 
 ### 4-6. 動作確認
 - `npm install` →（フロント）`npm run build` /（Rust）`src-tauri` で `cargo check` が通ることを確認。
